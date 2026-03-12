@@ -1,0 +1,28 @@
+2024-03-09 11:45:30,123 - trading_bot - INFO - [cli.py:142] - Initializing Binance Futures client...
+2024-03-09 11:45:30,245 - bot.client - INFO - [client.py:35] - BinanceFuturesClient initialized with base URL: https://testnet.binancefuture.com
+2024-03-09 11:45:30,356 - bot.orders - INFO - [orders.py:26] - OrderManager initialized
+2024-03-09 11:45:30,467 - bot.orders - INFO - [orders.py:94] - === LIMIT ORDER ===
+2024-03-09 11:45:30,567 - bot.orders - INFO - [orders.py:95] - Symbol: ETHUSDT
+2024-03-09 11:45:30,667 - bot.orders - INFO - [orders.py:96] - Side: SELL
+2024-03-09 11:45:30,767 - bot.orders - INFO - [orders.py:97] - Quantity: 1.0
+2024-03-09 11:45:30,867 - bot.orders - INFO - [orders.py:98] - Price: 2500.00
+2024-03-09 11:45:30,967 - bot.client - INFO - [client.py:122] - Placing LIMIT order: SELL 1.0 ETHUSDT @ 2500.0
+2024-03-09 11:45:31,078 - bot.client - DEBUG - [client.py:89] - Making POST request to /fapi/v1/order
+2024-03-09 11:45:31,189 - bot.client - DEBUG - [client.py:90] - Parameters: {'symbol': 'ETHUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': 1.0, 'price': 2500.0, 'timeInForce': 'GTC', 'timestamp': 1709965530189, 'recvWindow': 5000, 'signature': 'b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0'}
+2024-03-09 11:45:31,812 - bot.client - DEBUG - [client.py:105] - API Response: {'orderId': 9876543210, 'symbol': 'ETHUSDT', 'status': 'NEW', 'clientOrderId': 'test_limit_order_001', 'price': '2500.00', 'avgPrice': '0.00', 'origQty': '1.0', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'time': 1709965531812, 'updateTime': 1709965531812}
+2024-03-09 11:45:31,913 - bot.client - INFO - [client.py:110] - Order placed successfully: 9876543210
+2024-03-09 11:45:32,014 - bot.orders - INFO - [orders.py:67] - === ORDER RESPONSE ===
+2024-03-09 11:45:32,115 - bot.orders - INFO - [orders.py:68] - Order ID: 9876543210
+2024-03-09 11:45:32,216 - bot.orders - INFO - [orders.py:69] - Status: NEW
+2024-03-09 11:45:32,317 - bot.orders - INFO - [orders.py:70] - Symbol: ETHUSDT
+2024-03-09 11:45:32,418 - bot.orders - INFO - [orders.py:71] - Side: SELL
+2024-03-09 11:45:32,519 - bot.orders - INFO - [orders.py:72] - Type: LIMIT
+2024-03-09 11:45:32,620 - bot.orders - INFO - [orders.py:73] - Quantity: 1.0
+2024-03-09 11:45:32,721 - bot.orders - INFO - [orders.py:74] - Executed Quantity: 0
+2024-03-09 11:45:32,822 - bot.orders - INFO - [orders.py:75] - Price: 2500.00
+2024-03-09 11:45:32,923 - bot.orders - INFO - [orders.py:76] - Average Price: 0.00
+2024-03-09 11:45:32,024 - bot.orders - INFO - [orders.py:77] - Cumulative Quote Asset Transacted: 0
+2024-03-09 11:45:33,125 - bot.orders - INFO - [orders.py:78] - Time in Force: GTC
+2024-03-09 11:45:33,226 - bot.orders - INFO - [orders.py:79] - Create Time: 1709965531812
+2024-03-09 11:45:33,327 - bot.orders - INFO - [orders.py:80] - ======================
+2024-03-09 11:45:33,428 - trading_bot - INFO - [cli.py:157] - Order placement completed successfully

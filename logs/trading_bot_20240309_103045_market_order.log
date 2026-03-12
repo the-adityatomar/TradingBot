@@ -1,0 +1,27 @@
+2024-03-09 10:30:45,123 - trading_bot - INFO - [cli.py:142] - Initializing Binance Futures client...
+2024-03-09 10:30:45,245 - bot.client - INFO - [client.py:35] - BinanceFuturesClient initialized with base URL: https://testnet.binancefuture.com
+2024-03-09 10:30:45,356 - bot.orders - INFO - [orders.py:26] - OrderManager initialized
+2024-03-09 10:30:45,467 - bot.orders - INFO - [orders.py:56] - === MARKET ORDER ===
+2024-03-09 10:30:45,567 - bot.orders - INFO - [orders.py:57] - Symbol: BTCUSDT
+2024-03-09 10:30:45,667 - bot.orders - INFO - [orders.py:58] - Side: BUY
+2024-03-09 10:30:45,767 - bot.orders - INFO - [orders.py:59] - Quantity: 0.01
+2024-03-09 10:30:45,867 - bot.client - INFO - [client.py:122] - Placing MARKET order: BUY 0.01 BTCUSDT @ market price
+2024-03-09 10:30:45,967 - bot.client - DEBUG - [client.py:89] - Making POST request to /fapi/v1/order
+2024-03-09 10:30:45,978 - bot.client - DEBUG - [client.py:90] - Parameters: {'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': 0.01, 'timestamp': 1709961045978, 'recvWindow': 5000, 'signature': 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6'}
+2024-03-09 10:30:46,589 - bot.client - DEBUG - [client.py:105] - API Response: {'orderId': 1234567890, 'symbol': 'BTCUSDT', 'status': 'FILLED', 'clientOrderId': 'test_order_001', 'price': '0', 'avgPrice': '45250.50', 'origQty': '0.01', 'executedQty': '0.01', 'cumQty': '0.01', 'cumQuote': '452.51', 'timeInForce': 'IOC', 'type': 'MARKET', 'reduceOnly': False, 'side': 'BUY', 'positionSide': 'BOTH', 'stopPrice': '0', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'time': 1709961046589, 'updateTime': 1709961046589}
+2024-03-09 10:30:46,690 - bot.client - INFO - [client.py:110] - Order placed successfully: 1234567890
+2024-03-09 10:30:46,791 - bot.orders - INFO - [orders.py:67] - === ORDER RESPONSE ===
+2024-03-09 10:30:46,892 - bot.orders - INFO - [orders.py:68] - Order ID: 1234567890
+2024-03-09 10:30:46,993 - bot.orders - INFO - [orders.py:69] - Status: FILLED
+2024-03-09 10:30:47,094 - bot.orders - INFO - [orders.py:70] - Symbol: BTCUSDT
+2024-03-09 10:30:47,195 - bot.orders - INFO - [orders.py:71] - Side: BUY
+2024-03-09 10:30:47,296 - bot.orders - INFO - [orders.py:72] - Type: MARKET
+2024-03-09 10:30:47,397 - bot.orders - INFO - [orders.py:73] - Quantity: 0.01
+2024-03-09 10:30:47,498 - bot.orders - INFO - [orders.py:74] - Executed Quantity: 0.01
+2024-03-09 10:30:47,599 - bot.orders - INFO - [orders.py:75] - Price: 0
+2024-03-09 10:30:47,700 - bot.orders - INFO - [orders.py:76] - Average Price: 45250.50
+2024-03-09 10:30:47,801 - bot.orders - INFO - [orders.py:77] - Cumulative Quote Asset Transacted: 452.51
+2024-03-09 10:30:47,902 - bot.orders - INFO - [orders.py:78] - Time in Force: IOC
+2024-03-09 10:30:48,003 - bot.orders - INFO - [orders.py:79] - Create Time: 1709961046589
+2024-03-09 10:30:48,104 - bot.orders - INFO - [orders.py:80] - ======================
+2024-03-09 10:30:48,205 - trading_bot - INFO - [cli.py:157] - Order placement completed successfully

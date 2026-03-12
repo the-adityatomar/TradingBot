@@ -1,0 +1,116 @@
+name: Trading Bot - Test & Deploy
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r trading_bot/requirements.txt
+        pip install pytest pytest-cov flake8
+    
+    - name: Lint with flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 trading_bot/bot --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 trading_bot/bot --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
+    
+    - name: Run demo (no credentials required)
+      run: |
+        python demo.py
+    
+    - name: Test validators
+      run: |
+        python -c "
+from trading_bot.bot.validators import OrderValidator
+v = OrderValidator()
+assert v.validate_symbol('BTCUSDT')[0] == True
+assert v.validate_side('BUY')[0] == True
+assert v.validate_quantity('0.01')[0] == True
+print('✓ Validator tests passed')
+"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r trading_bot/requirements.txt
+    
+    - name: Verify credentials are available
+      run: |
+        if [ -z "${{ secrets.BINANCE_API_KEY }}" ]; then
+          echo "⚠️  WARNING: BINANCE_API_KEY secret not set"
+          echo "Set this in GitHub Secrets to enable live trading"
+        fi
+        if [ -z "${{ secrets.BINANCE_API_SECRET }}" ]; then
+          echo "⚠️  WARNING: BINANCE_API_SECRET secret not set"
+          echo "Set this in GitHub Secrets to enable live trading"
+        fi
+    
+    - name: Upload logs (if any)
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: trading-bot-logs
+        path: logs/
+        retention-days: 30
+
+  security-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install security tools
+      run: |
+        pip install bandit safety
+    
+    - name: Check for hardcoded secrets
+      run: |
+        bandit -r trading_bot/bot -f json -o bandit-report.json || true
+        cat bandit-report.json
+    
+    - name: Check for exposed credentials
+      run: |
+        if grep -r "BINANCE_API_KEY\s*=" trading_bot/ --include="*.py" | grep -v "os.getenv\|environ"; then
+          echo "❌ ERROR: Found hardcoded API credentials in code!"
+          exit 1
+        fi
+        if grep -r "BINANCE_API_SECRET\s*=" trading_bot/ --include="*.py" | grep -v "os.getenv\|environ"; then
+          echo "❌ ERROR: Found hardcoded API secret in code!"
+          exit 1
+        fi
+        echo "✓ No hardcoded credentials found"
